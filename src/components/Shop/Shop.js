@@ -1,19 +1,31 @@
 import React, { useState } from 'react';
-import fakeData from '../../fakeData/products.JSON';
+import fakeData from '../../fakeData/products.json';
+import './Shop.css';
+import Product from '../Product/Product';
+import Cart from '../Cart/Cart';
 
 const Shop = () => {
-    console.log(fakeData);
-    const products = fakeData.slice(0,10);
-    // const [products, setProducts] = useState(first10.length);
+    const first10 = fakeData.slice(0, 10);
+    const [products, setProducts] = useState(first10);
+    const [cart, setCart] = useState([]);
+    function productAddHandler(product) {
+        console.log(product);
+        const newCart = [...cart, product];
+        setCart(newCart);
+    }
     return (
-        <div>
-            <h1>This is shop.</h1>
-            <h4>{products.length}</h4>
-            <ul>
-                {
-                    products.map(product => <li>{product.name}</li>)
-                }
-            </ul>
+        <div className='shop-container'>
+            <div className="product-container">
+                    {
+                        products.map(pd => <Product
+                            info={pd}
+                            productAddHandler={productAddHandler}
+                            ></Product>)
+                    }
+            </div>
+            <div className="cart-container">
+                <Cart cart={cart}></Cart>
+            </div>
         </div>
     );
 };
