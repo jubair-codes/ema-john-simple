@@ -20,7 +20,8 @@ const Shop = () => {
                         products.map(pd => <Product
                             info={pd}
                             productAddHandler={productAddHandler}
-                            ></Product>)
+                            showAddToCart={true}
+                            />)
                     }
             </div>
             <div className="cart-container">
